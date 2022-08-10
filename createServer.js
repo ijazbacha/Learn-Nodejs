@@ -1,9 +1,9 @@
 var http = require("http");
-var url = require("url");
+const userData = require('./userData')
 
 const serverConfig = (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
-  res.write("Welcome to Node Js");
+  res.write(JSON.stringify(userData));
   res.end(); //end the response
 };
 
