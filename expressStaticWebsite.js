@@ -18,4 +18,8 @@ app.get('/about', (req, res) =>{
     res.sendFile(`${publicDirPath}/about.html`)
 })
 
+app.get('*', (req, res) =>{
+    res.sendFile(`${publicDirPath}/pageNotFound.html`)
+})
+
 app.listen(7000)
