@@ -4,6 +4,8 @@ const path = require('path')
 const app = express()
 const publicDirPath = path.join(__dirname, 'public')
 
+app.set('view engine', 'ejs')
+
 //--------- show page with .html extension-----------------
 // app.use(express.static(publicDirPath)).listen(7000)
 
@@ -16,6 +18,15 @@ app.get('', (req, res) =>{
 
 app.get('/about', (req, res) =>{
     res.sendFile(`${publicDirPath}/about.html`)
+})
+
+app.get('/profile', (req, res) =>{
+    let data={
+        name: 'Ijaz Bacha',
+        email: 'Bacha@geail.com',
+        contact: '+1234567890'
+    }
+    res.render('profile', {data})
 })
 
 app.get('*', (req, res) =>{
