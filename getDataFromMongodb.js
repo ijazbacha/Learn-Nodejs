@@ -6,5 +6,6 @@ const getDB = async () =>{
     const collection = db.collection('user');
   let userList = await collection.find({}).toArray()
   console.log('collection', userList);
+//   return userList
 }
 getDB()
