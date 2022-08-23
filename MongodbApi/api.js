@@ -34,6 +34,17 @@ app.put('/updateUser/:name', async (req, res) =>{
   }
 })
 
+app.delete('/removeUser/:name', async (req, res) =>{
+  const db = await dbConnect()
+  const userCollection = db.collection('user')
+  const result = await userCollection.deleteOne({first_name: req.params.name})
+  if(result.deletedCount > 0){
+    res.send("User " + req.params.name + " Successfully Delete")
+  }else{
+    res.send("User " + req.params.name + " is not Available")
+  }
+})
+
 app.listen(4000, () =>
   console.log("Server is runing on port: http://localhost:4000")
 );
