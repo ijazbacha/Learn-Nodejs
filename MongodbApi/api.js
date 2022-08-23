@@ -1,6 +1,6 @@
 const dbConnect = require("../connectMongodb");
 const express = require("express");
-const { application } = require("express");
+const mongodb = require("mongodb");
 
 const app = express();
 
@@ -25,25 +25,30 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
-app.put('/updateUser/:name', async (req, res) =>{
-  const db = await dbConnect()
-  const userCollection = db.collection('user')
-  const result = await userCollection.updateOne({first_name: req.params.name}, {$set:req.body})
-  if(result.acknowledged){
-    res.send("User " + req.params.name + " Successfully Updated")
+app.put("/updateUser/:name", async (req, res) => {
+  const db = await dbConnect();
+  const userCollection = db.collection("user");
+  const result = await userCollection.updateOne(
+    { first_name: req.params.name },
+    { $set: req.body }
+  );
+  if (result.acknowledged) {
+    res.send("User " + req.params.name + " Successfully Updated");
   }
-})
+});
 
-app.delete('/removeUser/:name', async (req, res) =>{
-  const db = await dbConnect()
-  const userCollection = db.collection('user')
-  const result = await userCollection.deleteOne({first_name: req.params.name})
-  if(result.deletedCount > 0){
-    res.send("User " + req.params.name + " Successfully Delete")
-  }else{
-    res.send("User " + req.params.name + " is not Available")
+app.delete("/removeUser/:id", async (req, res) => {
+  const db = await dbConnect();
+  const userCollection = db.collection("user");
+  const result = await userCollection.deleteOne({
+    _id: new mongodb.ObjectId(req.params.id),
+  });
+  if (result.deletedCount > 0) {
+    res.send("User " + req.params.id + " Successfully Delete");
+  } else {
+    res.send("User " + req.params.id + " is not Available");
   }
-})
+});
 
 app.listen(4000, () =>
   console.log("Server is runing on port: http://localhost:4000")
