@@ -11,4 +11,11 @@ app.get('/', async (req, res) =>{
     res.send(result)
 })
 
+app.post('/create', async (req, res) =>{
+    const user = new User(req.body)
+    const result = await user.save()
+    console.log('result', result);
+    res.send('created')
+})
+
 app.listen(5000)
