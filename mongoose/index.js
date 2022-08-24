@@ -1,3 +1,4 @@
+const { application } = require('express');
 const express = require('express')
 require('./config')
 const User = require('./user')
@@ -21,6 +22,11 @@ app.put('/update/:_id',async (req, res) =>{
     const user = await User.updateOne(req.params, {$set: req.body})
     console.log('user', user);
     res.send(user)
+})
+
+app.delete('/delete/:_id',async (req, res) =>{
+    const result = await User.deleteOne(req.params)
+    res.send(result)
 })
 
 app.listen(5000)
