@@ -14,8 +14,13 @@ app.get('/', async (req, res) =>{
 app.post('/create', async (req, res) =>{
     const user = new User(req.body)
     const result = await user.save()
-    console.log('result', result);
-    res.send('created')
+    res.send(result)
+})
+
+app.put('/update/:_id',async (req, res) =>{
+    const user = await User.updateOne(req.params, {$set: req.body})
+    console.log('user', user);
+    res.send(user)
 })
 
 app.listen(5000)
