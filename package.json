@@ -1,0 +1,12 @@
+{
+  "name": "chaiaurcode",
+  "version": "1.0.0",
+  "description": "learn backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "ijaz bacha",
+  "license": "ISC"
+}
